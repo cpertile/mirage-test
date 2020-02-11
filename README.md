@@ -8,6 +8,12 @@ When running in production mode, the app's requests will pass through and reach 
 
 (You can simulate running in production mode by commenting the function that starts Mirage server. See below for details).
 
+## How to use it
+- clone the repo
+- install dependencies using `yarn` or `npm install`
+- run the project using `yarn start` or `npm run start`
+
+
 ## How it works
 Mirage is setup on `src/server.js`, where a User model is declared as well as seed functions for generating data and a route is specified using the real API endpoint.
 
