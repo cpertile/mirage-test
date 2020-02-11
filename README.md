@@ -17,7 +17,7 @@ When running in production mode, the app's requests will pass through and reach 
 ## How it works
 Mirage is setup on `src/server.js`, where a User model is declared as well as seed functions for generating data and a route is specified using the real API endpoint.
 
-In `src/index.js`, a conditional statement checks if the app is in production environment and starts MirageJS server. You can comment out the function `makeServer()` inside of the conditional statement in order to simulate a production environment and watch the app automatically make the request to the [online Mockaroo API](https://my.api.mockaroo.com/mockaroo.json?key=51425750) instead of returning the mocked data.
+In `src/index.js`, a conditional statement checks if the app is in production environment and starts MirageJS server. You can comment out the function `startMirage()` inside of the conditional statement in order to simulate a production environment and watch the app automatically make the request to the [online Mockaroo API](https://my.api.mockaroo.com/mockaroo.json?key=51425750) instead of returning the mocked data.
 
 The API request itself is coded in `src/App.js` and doesn't need to be changed; this is exactly where MirageJS shines.
 You can code the entire front-end by using the real API endpoints but returning mocked data without all the hassle.

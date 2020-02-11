@@ -1,6 +1,6 @@
 import { Server, Model } from 'miragejs'
 
-export function makeServer({ environment = 'development' } = {}) {
+export function startMirage({ environment = 'development' } = {}) {
   const server = new Server({
     environment,
 
