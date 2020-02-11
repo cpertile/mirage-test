@@ -1,8 +1,11 @@
 ## MirageJS demo
 
 This app demonstrates how MirageJS works by intercepting HTTP requests.
+
 When running in development mode, the app's requests will be intercepted by MirageJS and mocked data will be returned.
+
 When running in production mode, the app's requests will pass through and reach the real API endpoint.
+
 (You can simulate running in production mode by commenting the function that starts Mirage server. See below for details).
 
 ## How it works
