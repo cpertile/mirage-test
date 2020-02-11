@@ -1,4 +1,4 @@
-import { Server, Model } from 'miragejs'
+import { Server, Model, Factory } from 'miragejs'
 
 /*
   We start by creating the function Server with our configs.
@@ -13,6 +13,21 @@ export function startMirage({ environment = 'development' } = {}) {
     /* We can define models with properties as well as relationships */
     models: {
       user: Model,
+    },
+
+    /* Factories are ways to dynamically create records, specially in tests */
+    factories: {
+      user: Factory.extend({
+        first_name(i) {
+          return `Name ${i+1}`;
+        },
+        last_name(i) {
+          return `LastName ${i+1}`
+        },
+        email(i) {
+          return `Email${i+1}@email.com`
+        }
+      })
     },
 
     /* Here we seed the database */
