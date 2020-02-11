@@ -4,7 +4,10 @@ import axios from 'axios'
 const App = () => {
   const [users, setUsers] = useState([]);
 
-  /* It's possible to use 'fetch' or 'axios' */
+  /* 
+  It's possible to use 'fetch' or 'axios',
+  using axios here because the response is easier to manipulate
+   */
 
   // useEffect(() => {
   //   fetch('https://my.api.mockaroo.com/mockaroo.json?key=51425750')
@@ -14,8 +17,8 @@ const App = () => {
 
   useEffect(() => {
     axios.get('https://my.api.mockaroo.com/mockaroo.json?key=51425750')
-    .then(res => setUsers(res.data.users))
-  },[])
+      .then(res => setUsers(res.data.users))
+  }, [])
 
   return (
     <ul>

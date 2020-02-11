@@ -1,13 +1,21 @@
 import { Server, Model } from 'miragejs'
 
+/*
+  We start by creating the function Server with our configs.
+  For this app we're using the 'development' environment, but for
+  testing purposes we can use the 'test' environment (which has some benefits for testing)
+*/
+
 export function startMirage({ environment = 'development' } = {}) {
   const server = new Server({
     environment,
 
+    /* We can define models with properties as well as relationships */
     models: {
       user: Model,
     },
 
+    /* Here we seed the database */
     seeds(server) {
       server.create('User', { 'id': 1, 'first_name': 'Mirage Stormy', 'last_name': 'Dimic', 'email': 'sdimic0@friendfeed.com' })
       server.create('User', { 'id': 2, 'first_name': 'Mirage Jewell', 'last_name': 'Zanettini', 'email': 'jzanettini1@netscape.com' })
@@ -17,11 +25,14 @@ export function startMirage({ environment = 'development' } = {}) {
     },
 
     routes() {
+      /* The namespace can be used in the case where our api begins with '/api' for example */
       this.namespace = ''
 
       this.get('https://my.api.mockaroo.com/mockaroo.json', (schema, request) => {
+        /* It's possible to obtain query parameters easily */
         console.log('param key=' + request.queryParams.key)
 
+        /* We have at our disposal common DB functions like 'all()' and 'find()' */
         return schema.users.all()
       })
     },
