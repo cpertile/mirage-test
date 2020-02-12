@@ -56,6 +56,13 @@ export function startMirage({ environment = 'development' } = {}) {
         let user = JSON.parse(request.requestBody)
         return schema.users.create(user)
       })
+
+      this.delete('/users/:id', (schema, request) => {
+        let userId = request.params.id;
+        console.log(userId)
+
+        return schema.users.find(userId).destroy();
+      }) 
     },
   })
 
