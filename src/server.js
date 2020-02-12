@@ -19,13 +19,13 @@ export function startMirage({ environment = 'development' } = {}) {
     factories: {
       user: Factory.extend({
         first_name(i) {
-          return `Name ${i+1}`;
+          return `Name ${i + 1}`;
         },
         last_name(i) {
-          return `LastName ${i+1}`
+          return `LastName ${i + 1}`
         },
         email(i) {
-          return `Email${i+1}@email.com`
+          return `Email${i + 1}@email.com`
         }
       })
     },
@@ -49,6 +49,12 @@ export function startMirage({ environment = 'development' } = {}) {
 
         /* We have at our disposal common DB functions like 'all()' and 'find()' */
         return schema.users.all()
+      })
+
+      /* There's no way to POST to the real online API so we do it locally */
+      this.post('/users', (schema, request) => {
+        let user = JSON.parse(request.requestBody)
+        return schema.users.create(user)
       })
     },
   })
