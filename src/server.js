@@ -59,8 +59,6 @@ export function startMirage({ environment = 'development' } = {}) {
 
       this.delete('/users/:id', (schema, request) => {
         let userId = request.params.id;
-        console.log(userId)
-
         return schema.users.find(userId).destroy();
       }) 
     },

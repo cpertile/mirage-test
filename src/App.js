@@ -39,11 +39,10 @@ const App = () => {
   }
 
   function handleDelete(userId) {
-    console.log(userId)
     axios.delete('/users/' + userId.toString())
       .then(() => {
         getData();
-    })
+      })
   }
 
   useEffect(() => {

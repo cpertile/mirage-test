@@ -1,4 +1,4 @@
-import { fireEvent, render, waitForElement, prettyDOM } from '@testing-library/react';
+import { fireEvent, render, waitForElement, prettyDOM, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from './App';
@@ -19,13 +19,13 @@ afterEach(() => {
 
 /* Tests */
 it('renders App', () => {
-  render(<App />);
+  render(<App />)
 })
 
 it('renders the list', () => {
-  const { getByTestId } = render(<App />);
-  const listElement = getByTestId('list');
-  expect(listElement).toBeInTheDocument();
+  const { getByTestId } = render(<App />)
+  const listElement = getByTestId('list')
+  expect(listElement).toBeInTheDocument()
 });
 
 it('renders the list items', async () => {
@@ -37,7 +37,7 @@ it('renders the list items', async () => {
 })
 
 it('can create a user', async () => {
-  const { getByTestId } = render(<App />);
+  const { getByTestId } = render(<App />)
   const newUserForm = await waitForElement(() => getByTestId('new-user-form'))
 
   userEvent.type(newUserForm.querySelector('input[name="first_name"]'), 'Jhonny')
@@ -49,14 +49,19 @@ it('can create a user', async () => {
   expect(newUser.querySelector('input[name="first_name"]').value).toBe('Jhonny')
   expect(newUser.querySelector('input[name="last_name"]').value).toBe('Rocket')
   expect(newUser.querySelector('input[name="email"]').value).toBe('jhonnyrocket@email.com')
-  expect(server.db.users.length).toBe(1);
-  expect(server.db.users[0].first_name).toBe('Jhonny');
-  expect(server.db.users[0].last_name).toBe('Rocket');
-  expect(server.db.users[0].email).toBe('jhonnyrocket@email.com');
+  expect(server.db.users.length).toBe(1)
+  expect(server.db.users[0].first_name).toBe('Jhonny')
+  expect(server.db.users[0].last_name).toBe('Rocket')
+  expect(server.db.users[0].email).toBe('jhonnyrocket@email.com')
 })
 
-it.only('can delete a user', async () => {
-  const { container, getAllByTestId } = render(<App />);
-  const button = await waitForElement(() => getAllByTestId('button-delete'))
-  console.log(prettyDOM(button))
+it('can delete a user', async () => {
+  server.create('User')
+  const { container, getByTestId } = render(<App />);
+  const button = await waitForElement(() => getByTestId('button-delete'))
+  userEvent.click(button)
+  await waitForElementToBeRemoved(() => getByTestId('button-delete'))
+  
+  expect(container.querySelector('button[data-testid="button-delete"]')).toBe(null)
+  expect(server.db.users.length).toBe(0)
 })
