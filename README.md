@@ -12,6 +12,7 @@ When running in production mode, the app's requests will pass through and reach 
 - clone the repo
 - install dependencies using `yarn` or `npm install`
 - run the project using `yarn start` or `npm run start`
+- run the tests using `yarn test` or `npm run test`
 
 
 ## How it works
