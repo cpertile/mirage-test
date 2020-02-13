@@ -77,7 +77,7 @@ const App = () => {
             <input type='text' name='first_name' defaultValue={user.first_name} />
             <input type='text' name='last_name' defaultValue={user.last_name} />
             <input type='text' name='email' defaultValue={user.email} />
-            <button onClick={() => handleDelete(user.id)}>X</button>
+            <button data-testid='button-delete' onClick={() => handleDelete(user.id)}>X</button>
           </li>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-import { fireEvent, render, waitForElement } from '@testing-library/react';
+import { fireEvent, render, waitForElement, prettyDOM } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from './App';
@@ -53,4 +53,10 @@ it('can create a user', async () => {
   expect(server.db.users[0].first_name).toBe('Jhonny');
   expect(server.db.users[0].last_name).toBe('Rocket');
   expect(server.db.users[0].email).toBe('jhonnyrocket@email.com');
+})
+
+it.only('can delete a user', async () => {
+  const { container, getAllByTestId } = render(<App />);
+  const button = await waitForElement(() => getAllByTestId('button-delete'))
+  console.log(prettyDOM(button))
 })
