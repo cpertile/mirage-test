@@ -1,0 +1,30 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0F0F0;
+}
+
+.form {
+  padding: 10px;
+
+}
+
+.form input {
+  padding: 2px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.form button {
+  padding: 10px 20px 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.list {
+  list-style: none;
+  margin-bottom: 20px;
+}

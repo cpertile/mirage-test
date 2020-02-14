@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './App.css'
 
 const App = () => {
   /* Creating state for user list and user form */
@@ -53,8 +54,8 @@ const App = () => {
   }, [])
 
   return (
-    <>
-      <form data-testid='new-user-form' onSubmit={handleSubmit}>
+    <div className='main-page'>
+      <form className='form' data-testid='new-user-form' onSubmit={handleSubmit}>
         <label htmlFor='first_name'>First Name</label>
         <br />
         <input type='text' name='first_name' value={newUserForm.first_name} onChange={handleChange} />
@@ -69,8 +70,7 @@ const App = () => {
         <br />
         <button type='submit'>Create User</button>
       </form>
-      <hr></hr>
-      <ul data-testid='list'>
+      <ul className='list' data-testid='list'>
         {users.map(user => (
           <li key={user.id} data-testid='list-item'>
             <input type='text' name='first_name' defaultValue={user.first_name} />
@@ -80,7 +80,7 @@ const App = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 
