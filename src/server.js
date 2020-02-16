@@ -32,11 +32,11 @@ export function startMirage({ environment = 'development' } = {}) {
 
     /* Here we seed the database */
     seeds(server) {
-      server.create('User', { 'id': 1, 'first_name': 'Mirage Stormy', 'last_name': 'Dimic', 'email': 'sdimic0@friendfeed.com' })
-      server.create('User', { 'id': 2, 'first_name': 'Mirage Jewell', 'last_name': 'Zanettini', 'email': 'jzanettini1@netscape.com' })
-      server.create('User', { 'id': 3, 'first_name': 'Mirage Ameline', 'last_name': 'Saberton', 'email': 'asaberton2@amazonaws.com' })
-      server.create('User', { 'id': 4, 'first_name': 'Mirage Tore', 'last_name': 'Atling', 'email': 'tatling3@census.gov' })
-      server.create('User', { 'id': 5, 'first_name': 'Mirage Forester', 'last_name': 'Wheatcroft', 'email': 'fwheatcroft4@indiatimes.com' })
+      server.create('user', { 'first_name': 'Mirage Stormy', 'last_name': 'Dimic', 'email': 'sdimic0@friendfeed.com' })
+      server.create('user', { 'first_name': 'Mirage Jewell', 'last_name': 'Zanettini', 'email': 'jzanettini1@netscape.com' })
+      server.create('user', { 'first_name': 'Mirage Ameline', 'last_name': 'Saberton', 'email': 'asaberton2@amazonaws.com' })
+      server.create('user', { 'first_name': 'Mirage Tore', 'last_name': 'Atling', 'email': 'tatling3@census.gov' })
+      server.create('user', { 'first_name': 'Mirage Forester', 'last_name': 'Wheatcroft', 'email': 'fwheatcroft4@indiatimes.com' })
     },
 
     routes() {
@@ -60,7 +60,7 @@ export function startMirage({ environment = 'development' } = {}) {
       this.delete('/users/:id', (schema, request) => {
         let userId = request.params.id;
         return schema.users.find(userId).destroy();
-      }) 
+      })
     },
   })
 
