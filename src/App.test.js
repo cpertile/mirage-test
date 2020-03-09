@@ -10,58 +10,58 @@ import { startMirage } from './server';
 let server
 
 beforeEach(() => {
-  server = startMirage({ environment: 'test' })
+	//server = startMirage({ environment: 'test' })
 })
 
 afterEach(() => {
-  server.shutdown()
+	server.shutdown()
 })
 
 /* Tests */
 it('renders App', () => {
-  render(<App />)
+	render(<App />)
 })
 
 it('renders the list', () => {
-  const { getByTestId } = render(<App />)
-  const listElement = getByTestId('list')
-  expect(listElement).toBeInTheDocument()
+	const { getByTestId } = render(<App />)
+	const listElement = getByTestId('list')
+	expect(listElement).toBeInTheDocument()
 });
 
 it('renders the list items', async () => {
-  // Here is where the factory come into play
-  server.createList('User', 5)
-  const { getAllByTestId } = render(<App />)
-  const listItemElements = await waitForElement(() => getAllByTestId('list-item'))
-  expect(listItemElements.length).toBe(5)
+	// Here is where the factory come into play
+	server.createList('User', 5)
+	const { getAllByTestId } = render(<App />)
+	const listItemElements = await waitForElement(() => getAllByTestId('list-item'))
+	expect(listItemElements.length).toBe(5)
 })
 
 it('can create a user', async () => {
-  const { getByTestId } = render(<App />)
-  const newUserForm = await waitForElement(() => getByTestId('new-user-form'))
+	const { getByTestId } = render(<App />)
+	const newUserForm = await waitForElement(() => getByTestId('new-user-form'))
 
-  userEvent.type(newUserForm.querySelector('input[name="first_name"]'), 'Jhonny')
-  userEvent.type(newUserForm.querySelector('input[name="last_name"]'), 'Rocket')
-  userEvent.type(newUserForm.querySelector('input[name="email"]'), 'jhonnyrocket@email.com')
-  fireEvent.submit(getByTestId('new-user-form'))
+	userEvent.type(newUserForm.querySelector('input[name="first_name"]'), 'Jhonny')
+	userEvent.type(newUserForm.querySelector('input[name="last_name"]'), 'Rocket')
+	userEvent.type(newUserForm.querySelector('input[name="email"]'), 'jhonnyrocket@email.com')
+	fireEvent.submit(getByTestId('new-user-form'))
 
-  const newUser = await waitForElement(() => getByTestId('list-item'))
-  expect(newUser.querySelector('input[name="first_name"]').value).toBe('Jhonny')
-  expect(newUser.querySelector('input[name="last_name"]').value).toBe('Rocket')
-  expect(newUser.querySelector('input[name="email"]').value).toBe('jhonnyrocket@email.com')
-  expect(server.db.users.length).toBe(1)
-  expect(server.db.users[0].first_name).toBe('Jhonny')
-  expect(server.db.users[0].last_name).toBe('Rocket')
-  expect(server.db.users[0].email).toBe('jhonnyrocket@email.com')
+	const newUser = await waitForElement(() => getByTestId('list-item'))
+	expect(newUser.querySelector('input[name="first_name"]').value).toBe('Jhonny')
+	expect(newUser.querySelector('input[name="last_name"]').value).toBe('Rocket')
+	expect(newUser.querySelector('input[name="email"]').value).toBe('jhonnyrocket@email.com')
+	expect(server.db.users.length).toBe(1)
+	expect(server.db.users[0].first_name).toBe('Jhonny')
+	expect(server.db.users[0].last_name).toBe('Rocket')
+	expect(server.db.users[0].email).toBe('jhonnyrocket@email.com')
 })
 
 it('can delete a user', async () => {
-  server.create('User')
-  const { container, getByTestId } = render(<App />);
-  const button = await waitForElement(() => getByTestId('button-delete'))
-  userEvent.click(button)
-  await waitForElementToBeRemoved(() => getByTestId('button-delete'))
-  
-  expect(container.querySelector('button[data-testid="button-delete"]')).toBe(null)
-  expect(server.db.users.length).toBe(0)
+	server.create('User')
+	const { container, getByTestId } = render(<App />);
+	const button = await waitForElement(() => getByTestId('button-delete'))
+	userEvent.click(button)
+	await waitForElementToBeRemoved(() => getByTestId('button-delete'))
+
+	expect(container.querySelector('button[data-testid="button-delete"]')).toBe(null)
+	expect(server.db.users.length).toBe(0)
 })
