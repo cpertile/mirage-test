@@ -10,7 +10,7 @@ import { startMirage } from './server';
 let server
 
 beforeEach(() => {
-  server = startMirage({ environment: 'test' })
+  //server = startMirage({ environment: 'test' })
 })
 
 afterEach(() => {
