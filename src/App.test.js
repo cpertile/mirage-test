@@ -56,7 +56,6 @@ it('can create a user', async () => {
 })
 
 it('can delete a user', async () => {
-<<<<<<< HEAD
 	server.create('User')
 	const { container, getByTestId } = render(<App />);
 	const button = await waitForElement(() => getByTestId('button-delete'))
@@ -66,14 +65,3 @@ it('can delete a user', async () => {
 	expect(container.querySelector('button[data-testid="button-delete"]')).toBe(null)
 	expect(server.db.users.length).toBe(0)
 })
-=======
-  server.create('User')
-  const { container, getByTestId } = render(<App />);
-  const button = await waitForElement(() => getByTestId('button-delete'))
-  userEvent.click(button)
-  await waitForElementToBeRemoved(() => getByTestId('button-delete'))
-
-  expect(container.querySelector('button[data-testid="button-delete"]')).toBe(null)
-  expect(server.db.users.length).toBe(0)
-})
->>>>>>> 4fad4ccb3c10bd5c0ece26ff735db68d4c462a4a
